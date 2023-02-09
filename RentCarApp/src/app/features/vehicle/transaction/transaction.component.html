@@ -1,0 +1,290 @@
+<div class="container-fluid mb-3">
+    <h2>Renta de Vehiculo</h2>
+</div>
+
+<div class="container-fluid">
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="clientId" class="form-label">Cliente</label>
+                    <select formControlName="clientId" 
+                                class="form-select form-select-md" 
+                                aria-label=".form-select-sm example" 
+                                id="clientId"
+                                [ngClass]="{'is-invalid': form.controls['clientId'].invalid && form.controls['clientId'].touched, 
+                                'is-valid': form.controls['clientId'].valid, '': form.controls['clientId'].untouched}">
+                                <option *ngFor="let client of clients" [value]="client.id">{{client.name}} {{client.lastName}} - {{client.personalNumber}}</option>
+                        </select>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="employeeId" class="form-label">Empleado</label>
+                    <select formControlName="employeeId" 
+                            class="form-select form-select-md" 
+                            aria-label=".form-select-sm example" 
+                            id="employeeId"
+                            [ngClass]="{'is-invalid': form.controls['employeeId'].invalid && form.controls['employeeId'].touched, 
+                            'is-valid': form.controls['employeeId'].valid, '': form.controls['employeeId'].untouched}">
+                            <option *ngFor="let employee of employees" [value]="employee.id">{{employee.name}} {{employee.lastName}} - {{employee.personalNumber}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="fuelQuantity" class="form-label">Cantidad de combustible</label>
+                    <select formControlName="fuelQuantity" 
+                            class="form-select form-select-md" 
+                            aria-label=".form-select-sm example" 
+                            id="fuelQuantity"
+                            [ngClass]="{'is-invalid': form.controls['fuelQuantity'].invalid && form.controls['fuelQuantity'].touched, 
+                            'is-valid': form.controls['fuelQuantity'].valid, '': form.controls['fuelQuantity'].untouched}">
+                            <option  value="1 / 4">1 / 4</option>
+                            <option  value="1 / 2">1 / 2</option>
+                            <option  value="3 / 4">3 / 4</option>
+                            <option  value="LLeno">Lleno</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">         
+                <label for="hasScratches" class="form-label">Tiene algun choque?</label>
+                <div class="container">
+                    <div class="form-check">
+                        <input formControlName="hasScratches" class="form-check-input" type="radio" id="hasScratches1" [value]="true">
+                        <label class="form-check-label" for="hasScratches1">
+                          Si
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input formControlName="hasScratches" class="form-check-input" type="radio" id="hasScratches2" [value]="false">
+                        <label class="form-check-label" for="hasScratches2">
+                          No
+                        </label>
+                      </div>
+                </div>
+            </div>         
+        </div>
+        <div class="row">
+            <div class="col-12">         
+                <label for="hasSpareTire" class="form-label">Tiene goma de repuesta?</label>
+                <div class="container">
+                    <div class="form-check">
+                        <input formControlName="hasSpareTire" class="form-check-input" type="radio" id="hasSpareTire1" [value]="true">
+                        <label class="form-check-label" for="hasSpareTire1">
+                          Si
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input formControlName="hasSpareTire" class="form-check-input" type="radio" id="hasSpareTire2" [value]="false">
+                        <label class="form-check-label" for="hasSpareTire2">
+                          No
+                        </label>
+                      </div>
+                </div>
+            </div>         
+        </div>
+        <div class="row">
+            <div class="col-12">         
+                <label for="hasHydraulicJack" class="form-label">Tiene gato hidraulico?</label>
+                <div class="container">
+                    <div class="form-check">
+                        <input formControlName="hasHydraulicJack" class="form-check-input" type="radio" id="hasHydraulicJack1" [value]="true">
+                        <label class="form-check-label" for="hasHydraulicJack1">
+                          Si
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input formControlName="hasHydraulicJack" class="form-check-input" type="radio" id="hasHydraulicJack2" [value]="false">
+                        <label class="form-check-label" for="hasHydraulicJack2">
+                          No
+                        </label>
+                      </div>
+                </div>
+            </div>         
+        </div>
+        <div class="row">
+            <div class="col-12">         
+                <label for="hasGlassBreak" class="form-label">Tiene roturas en el cristal?</label>
+                <div class="container">
+                    <div class="form-check">
+                        <input formControlName="hasGlassBreak" class="form-check-input" type="radio" id="hasGlassBreak1" [value]="true">
+                        <label class="form-check-label" for="hasGlassBreak1">
+                          Si
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input formControlName="hasGlassBreak" class="form-check-input" type="radio" id="hasGlassBreak2" [value]="false">
+                        <label class="form-check-label" for="hasGlassBreak2">
+                          No
+                        </label>
+                      </div>
+                </div>
+            </div>         
+        </div>
+        <div class="row">
+            <div class="col-12">         
+                <label for="isRightFrontTireOk" class="form-label">Esta en buen estado la goma frontal derecha?</label>
+                <div class="container">
+                    <div class="form-check">
+                        <input formControlName="isRightFrontTireOk" class="form-check-input" type="radio" id="isRightFrontTireOk1" [value]="true">
+                        <label class="form-check-label" for="isRightFrontTireOk1">
+                          Si
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input formControlName="isRightFrontTireOk" class="form-check-input" type="radio" id="isRightFrontTireOk2" [value]="false">
+                        <label class="form-check-label" for="isRightFrontTireOk2">
+                          No
+                        </label>
+                      </div>
+                </div>
+            </div>         
+        </div>
+        <div class="row">
+            <div class="col-12">         
+                <label for="isLeftFrontTireOk" class="form-label">Esta en buen estado la goma frontal izquierda?</label>
+                <div class="container">
+                    <div class="form-check">
+                        <input formControlName="isLeftFrontTireOk" class="form-check-input" type="radio" id="isLeftFrontTireOk1" [value]="true">
+                        <label class="form-check-label" for="isLeftFrontTireOk1">
+                          Si
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input formControlName="isLeftFrontTireOk" class="form-check-input" type="radio" id="isLeftFrontTireOk2" [value]="false">
+                        <label class="form-check-label" for="isLeftFrontTireOk2">
+                          No
+                        </label>
+                      </div>
+                </div>
+            </div>         
+        </div>
+        <div class="row">
+            <div class="col-12">         
+                <label for="isRightRearTireOk" class="form-label">Esta en buen estado la goma trasera derecha?</label>
+                <div class="container">
+                    <div class="form-check">
+                        <input formControlName="isRightRearTireOk" class="form-check-input" type="radio" id="isRightRearTireOk1" [value]="true">
+                        <label class="form-check-label" for="isRightRearTireOk1">
+                          Si
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input formControlName="isRightRearTireOk" class="form-check-input" type="radio" id="isRightRearTireOk2" [value]="false">
+                        <label class="form-check-label" for="isRightRearTireOk2">
+                          No
+                        </label>
+                      </div>
+                </div>
+            </div>         
+        </div>
+        <div class="row">
+            <div class="col-12">         
+                <label for="IsLeftRearTireOk" class="form-label">Esta en buen estado la goma trasera izquierda?</label>
+                <div class="container">
+                    <div class="form-check">
+                        <input formControlName="IsLeftRearTireOk" class="form-check-input" type="radio" id="IsLeftRearTireOk1" [value]="true">
+                        <label class="form-check-label" for="IsLeftRearTireOk1">
+                          Si
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input formControlName="IsLeftRearTireOk" class="form-check-input" type="radio" id="IsLeftRearTireOk2" [value]="false">
+                        <label class="form-check-label" for="IsLeftRearTireOk2">
+                          No
+                        </label>
+                      </div>
+                </div>
+            </div>         
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="description" class="form-label">Fecha de renta</label>
+                    <div class="input-group">
+                        <input
+                            class="form-control"
+                            placeholder="yyyy-mm-dd"
+                            name="dp"
+                            ngbDatepicker
+                            formControlName="rentDate"
+                            #d="ngbDatepicker"
+                            [ngClass]="{'is-invalid': form.controls['rentDate'].invalid && form.controls['rentDate'].touched, 
+                            'is-valid': form.controls['rentDate'].valid, '': form.controls['rentDate'].untouched}"
+                        />
+                        <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="description" class="form-label">Fecha de devolucion</label>
+                    <div class="input-group">
+                        <input
+                            class="form-control"
+                            placeholder="yyyy-mm-dd"
+                            name="dp2"
+                            ngbDatepicker
+                            formControlName="deliveryDate"
+                            #d2="ngbDatepicker"
+                            [ngClass]="{'is-invalid': form.controls['deliveryDate'].invalid && form.controls['deliveryDate'].touched, 
+                            'is-valid': form.controls['deliveryDate'].valid, '': form.controls['deliveryDate'].untouched}"
+                        />
+                        <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="description" class="form-label">Monto por dia</label>
+                    <input  
+                           type="number" 
+                           class="form-control" 
+                           id="description"
+                           formControlName="amountDay"
+                           min="0"
+                           oninput="this.value = !!this.value && Math.abs(this.value) > 0 ? Math.abs(this.value) : null"
+                           [ngClass]="{'is-invalid': form.controls['amountDay'].invalid && form.controls['amountDay'].touched, 
+                            'is-valid': form.controls['amountDay'].valid, '': form.controls['amountDay'].untouched}">
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="description" class="form-label">Total de dias</label>
+                    <input  
+                           type="number" 
+                           class="form-control" 
+                           id="description"
+                           formControlName="totalDays">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="mb-3">
+                    <label for="description" class="form-label">Descripcion</label>
+                    <textarea class="form-control" 
+                              placeholder="Descripcion...." 
+                              id="floatingTextarea"
+                              style="height: 100px"
+                              formControlName="description"
+                              [ngClass]="{'is-invalid': form.controls['description'].invalid && form.controls['description'].touched, 
+                            'is-valid': form.controls['description'].valid, '': form.controls['description'].untouched}"></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-12 d-flex justify-content-end">
+                <button type="button" class="btn btn-outline-success" (click)="save()" [disabled]="!form.valid">Guardar</button>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,103 @@
+<div class="container-fluid">
+    <div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">{{id ? 'Actualizar' : 'Agregar'}} Empleado</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="onClose()"></button>
+	</div>
+	<div class="modal-body">
+		<form [formGroup]="form">
+            <div class="row">
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nombre</label>
+                        <input formControlName="name" 
+                               type="text" 
+                               class="form-control" 
+                               id="name"
+                               [ngClass]="{'is-invalid': form.controls['name'].invalid && form.controls['name'].touched, 
+                                'is-valid': form.controls['name'].valid, '': form.controls['name'].untouched}">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="lastName" class="form-label">Apellido</label>
+                        <input formControlName="lastName" 
+                               type="text" 
+                               class="form-control" 
+                               id="lastName"
+                               [ngClass]="{'is-invalid': form.controls['lastName'].invalid && form.controls['lastName'].touched, 
+                                'is-valid': form.controls['lastName'].valid, '': form.controls['lastName'].untouched}">
+                    </div>
+                </div>
+            </div>  
+            <div class="row">
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="personalNumber" class="form-label">
+                            Cedula
+                        </label>
+                        <input formControlName="personalNumber" 
+                               type="number" class="form-control" 
+                               id="personalNumber"
+                               min="0"
+                               oninput="this.value = !!this.value && Math.abs(this.value) > 0 ? Math.abs(this.value) : null"
+                               [ngClass]="{'is-invalid': form.controls['personalNumber'].invalid && form.controls['personalNumber'].touched, 
+                                'is-valid': form.controls['personalNumber'].valid, 
+                                '': form.controls['personalNumber'].untouched}">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="batchWork" class="form-label">Tanda de trabajo</label>
+                        <select formControlName="batchWork" 
+                                class="form-select form-select-md" 
+                                aria-label=".form-select-sm example" 
+                                id="batchWork"
+                                [ngClass]="{'is-invalid': form.controls['batchWork'].invalid && form.controls['batchWork'].touched, 
+                                'is-valid': form.controls['batchWork'].valid, '': form.controls['batchWork'].untouched}">
+                            <option [value]="1">Matutina</option>
+                            <option [value]="2">Vespertina</option>
+                            <option [value]="3">Nocturna</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="commissionPercentage" class="form-label">Porciento comision</label>
+                        <input formControlName="commissionPercentage" 
+                               type="number" class="form-control" 
+                               id="commissionPercentage" 
+                               min="1"
+                               max="100"
+                               oninput="this.value = !!this.value && Math.abs(this.value) > 0 ? Math.abs(this.value) : null"
+                               [ngClass]="{'is-invalid': form.controls['commissionPercentage'].invalid && form.controls['commissionPercentage'].touched, 
+                                'is-valid': form.controls['commissionPercentage'].valid, '': form.controls['commissionPercentage'].untouched}">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="startDate" class="form-label">Fecha de inicio</label>      
+                        <div class="input-group">
+                            <input
+                                class="form-control"
+                                placeholder="yyyy-mm-dd"
+                                name="dp"
+                                ngbDatepicker
+                                formControlName="startDate"
+                                #d="ngbDatepicker"
+                                [ngClass]="{'is-invalid': form.controls['startDate'].invalid && form.controls['startDate'].touched, 
+                                'is-valid': form.controls['startDate'].valid, '': form.controls['startDate'].untouched}"
+                            />
+                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-success" (click)="save()" [disabled]="!form.valid">Guardar</button>
+	</div>
+</div>
+

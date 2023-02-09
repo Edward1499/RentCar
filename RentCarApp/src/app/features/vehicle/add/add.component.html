@@ -1,0 +1,158 @@
+<div class="d-flex justify-content-between mb-3">
+    <h2>Agregar Vehiculo</h2>
+</div>
+<div class="container-fluid">
+    <form [formGroup]="form">
+        <div class="row">
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="description" class="form-label">Descripcion</label>
+                    <input formControlName="description" 
+                           type="text" 
+                           class="form-control" 
+                           id="description"
+                           [ngClass]="{'is-invalid': form.controls['description'].invalid && form.controls['description'].touched, 
+                            'is-valid': form.controls['description'].valid, '': form.controls['description'].untouched}">
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="chasisNumber" class="form-label">Numero de chasis</label>
+                    <input formControlName="chasisNumber" 
+                           type="text" 
+                           class="form-control" 
+                           id="chasisNumber"
+                           [ngClass]="{'is-invalid': form.controls['chasisNumber'].invalid && form.controls['chasisNumber'].touched, 
+                            'is-valid': form.controls['chasisNumber'].valid, '': form.controls['chasisNumber'].untouched}">
+                </div>
+            </div>
+        </div>  
+        <div class="row">
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="engineNumber" class="form-label">Numero de motor</label>
+                    <input formControlName="engineNumber" 
+                           type="text" 
+                           class="form-control" 
+                           id="engineNumber"
+                           [ngClass]="{'is-invalid': form.controls['engineNumber'].invalid && form.controls['engineNumber'].touched, 
+                            'is-valid': form.controls['engineNumber'].valid, '': form.controls['engineNumber'].untouched}">
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="licensePlate" class="form-label">
+                        Numero de placa
+                    </label>
+                    <input formControlName="licensePlate" 
+                           type="text" 
+                           class="form-control" 
+                           id="licensePlate"
+                           [ngClass]="{'is-invalid': form.controls['licensePlate'].invalid && form.controls['licensePlate'].touched, 
+                            'is-valid': form.controls['licensePlate'].valid, 
+                            '': form.controls['licensePlate'].untouched}">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="year" class="form-label">Año</label>
+                    <select formControlName="year" 
+                            class="form-select form-select-md" 
+                            aria-label=".form-select-md example" 
+                            id="year"
+                            [ngClass]="{'is-invalid': form.controls['year'].invalid && form.controls['year'].touched, 
+                            'is-valid': form.controls['year'].valid, 
+                            '': form.controls['year'].untouched}">
+                        <option *ngFor="let year of years" [value]="year">{{year}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="vehicleTypeId" class="form-label">Tipo de vehiculo</label>
+                    <select formControlName="vehicleTypeId" 
+                            class="form-select form-select-md" 
+                            aria-label=".form-select-md example" 
+                            id="vehicleTypeId"
+                            [ngClass]="{'is-invalid': form.controls['vehicleTypeId'].invalid && form.controls['vehicleTypeId'].touched, 
+                            'is-valid': form.controls['vehicleTypeId'].valid, 
+                            '': form.controls['vehicleTypeId'].untouched}">
+                        <option *ngFor="let vehicleType of vehicleTypes" [value]="vehicleType.id">{{vehicleType.description}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="brandId" class="form-label">Marca</label>
+                    <select formControlName="brandId" 
+                            class="form-select form-select-md" 
+                            aria-label=".form-select-md example" 
+                            id="brandId"
+                            (change)="onChangeBrand($event)"
+                            [ngClass]="{'is-invalid': form.controls['brandId'].invalid && form.controls['brandId'].touched, 
+                            'is-valid': form.controls['brandId'].valid, 
+                            '': form.controls['brandId'].untouched}">
+                        <option *ngFor="let brand of brands" [value]="brand.id">{{brand.description}}</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="modelId" class="form-label">Modelo</label>
+                    <select formControlName="modelId" 
+                            class="form-select form-select-md" 
+                            aria-label=".form-select-md example" 
+                            id="modelId"
+                            [ngClass]="{'is-invalid': form.controls['modelId'].invalid && form.controls['modelId'].touched, 
+                            'is-valid': form.controls['modelId'].valid, 
+                            '': form.controls['modelId'].untouched}">
+                        <option *ngFor="let model of models" [value]="model.id">{{model.description}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div class="mb-3">
+                    <label for="fuelId" class="form-label">Tipo de combustible</label>
+                    <select formControlName="fuelId" 
+                            class="form-select form-select-md" 
+                            aria-label=".form-select-md example" 
+                            id="fuelId"
+                            [ngClass]="{'is-invalid': form.controls['fuelId'].invalid && form.controls['fuelId'].touched, 
+                            'is-valid': form.controls['fuelId'].valid, 
+                            '': form.controls['fuelId'].untouched}">
+                        <option *ngFor="let fuel of fuels" [ngValue]="fuel.id">{{fuel.description}}</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col-12 mb-3" *ngIf="images.length">
+                <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+                    <div class="example-box" *ngFor="let image of images; let i = index;" cdkDrag>
+                        <img [src]="image" alt="image">
+                        <i class="fa-solid fa-trash-can" 
+                            style="cursor: pointer; margin-right: 40px; font-size: 18px;" 
+                            title="Eliminar"
+                            (click)="onRemoveImage(i)"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12">
+                <button class="btn btn-primary" (click)="onUpload()"><i class="fa-solid fa-camera"></i> Subir Imagen</button>
+                <input #fileInput hidden class="form-control" type="file" (change)="onChangeFileInput($event)" accept="image/png, image/gif, image/jpeg" multiple>
+            </div>
+        </div>
+        <div class="row mb-5">
+            <div class="col-12 d-flex justify-content-end">
+                <button type="button" class="btn btn-outline-success" (click)="save()" [disabled]="!form.valid || !images.length">Guardar</button>
+            </div>
+        </div>
+    </form>
+</div>

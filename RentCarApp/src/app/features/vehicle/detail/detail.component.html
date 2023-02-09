@@ -1,0 +1,27 @@
+<div *ngIf="vehicle" class="container-fluid">
+    <div class="d-flex justify-content-between mb-3">
+        <h2>{{vehicle.description}}</h2>
+        <div class="actions d-flex">
+            <button *ngIf="vehicle.isActive" class="btn btn-success" style="margin-right: 10px;" (click)="onComplete()"><i class="fa-solid fa-check"></i> Finalizar Renta</button>
+            <button *ngIf="!vehicle.isActive" class="btn btn-success" style="margin-right: 10px;" routerLink="/vehiculos/rentar/{{vehicle.id}}"><i class="fa-solid fa-car"></i> Rentar</button>
+            <button class="btn btn-secondary" style="margin-right: 10px;"><i class="fa-solid fa-pen-to-square"></i> Editar</button>
+            <button class="btn btn-danger" (click)="onRemove()"><i class="fa-solid fa-trash-can"></i> Eliminar</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <gallery id="basic-test" imageSize="cover" fluid [items]="items"></gallery>
+        </div>
+        <div class="col-6">
+            <h3 class="fw-bold">Datos Generales</h3>
+            <div class="detail">
+                <p><span class="fw-bold">Marca: </span>{{vehicle.brand.description}}</p>
+                <p><span class="fw-bold">Modelo: </span>{{vehicle.model.description}}</p>
+                <p><span class="fw-bold">Tipo de combustile: </span>{{vehicle.fuel.description}}</p>
+                <p><span class="fw-bold">Año: </span>{{vehicle.year}}</p>
+                <p><span class="fw-bold">Estado: </span>{{vehicle.isActive ? 'Rentado' : 'Disponible'}}</p>
+            </div>
+        </div>
+    </div>
+
+</div>

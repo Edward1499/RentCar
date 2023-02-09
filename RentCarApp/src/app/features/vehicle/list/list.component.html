@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-end mb-3">
+    <button type="button" class="btn btn-primary" routerLink="/vehiculos/agregar">Agregar <i class="fa-solid fa-plus"></i></button>
+</div>
+<div class="row" [formGroup]="form">
+    <div class="col-3">
+        <div class="main_div">
+            <div class="d-flex flex-column mt-3">
+                <p class="text-header">Tipo de combustible</p>             
+                <select class="form-select form-select-sm" 
+                        aria-label=".form-select-sm example"
+                        (change)="onChangeInputs()"
+                        formControlName="fuelId">
+                    <option selected [value]="0">Todos</option>
+                    <option *ngFor="let fuel of fuels" [value]="fuel.id">{{fuel.description}}</option>
+                </select>
+            </div>
+            <div class="d-flex flex-column mt-3">
+                <p class="text-header">Año <small style="font-weight: 0; font-size: 12px;">(desliza los controles para cambiar)</small></p>     
+                <npn-slider [min]="1990" [max]="2023" (onChange)="onSliderChange($event)" [step]="1" [showStepIndicator]="true" [hide-values]="true"></npn-slider>
+            </div>
+            <div class="d-flex flex-column mt-3">
+                <p class="text-header">Tipo de vehiculo</p>       
+                <select class="form-select form-select-sm" 
+                        aria-label=".form-select-sm example"
+                        (change)="onChangeInputs()"
+                        formControlName="vehicleTypeId">
+                    <option selected [value]="0">Todos</option>
+                    <option *ngFor="let vehicleType of vehicleTypes" [value]="vehicleType.id">{{vehicleType.description}}</option>
+                </select>
+            </div>
+            <div class="d-flex flex-column mt-3">
+                <p class="text-header">Marca</p>
+                <select class="form-select form-select-sm" 
+                        (change)="onChangeBrand()"
+                        aria-label=".form-select-sm example"
+                        formControlName="brandId">
+                    <option selected [value]="0">Todos</option>
+                    <option *ngFor="let brand of brands" [value]="brand.id">{{brand.description}}</option>
+                </select>
+            </div>
+            <div class="d-flex flex-column mt-3">
+                <p class="text-header">Modelo</p> 
+                <select class="form-select form-select-sm" 
+                        aria-label=".form-select-sm example"
+                        (change)="onChangeInputs()"
+                        formControlName="modelId">
+                    <option selected [value]="0">Todos</option>
+                    <option *ngFor="let model of models" [value]="model.id">{{model.description}}</option>
+                </select>
+            </div>
+            <div class="d-flex flex-column mt-3">
+                <p class="text-header">Estado</p>       
+                <select class="form-select form-select-sm" 
+                        aria-label=".form-select-sm example"
+                        (change)="onChangeInputs()"
+                        formControlName="isActive">
+                    <option selected [value]="null">Todos</option>
+                    <option [ngValue]="true">Rentado</option>
+                    <option [ngValue]="false">Disponible</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-9">
+        <div class="row">
+            <div *ngFor="let vehicle of vehicles" class="col-4 mb-3">
+                <div class="card" style="width: 18rem;">
+                    <a routerLink="/vehiculos/detalle/{{vehicle.id}}">
+                        <img style="height: 215px;" src="{{vehicle.images[0].imageUrl}}" class="card-img-top" alt="...">
+                    </a>
+                    <div class="card-body">
+                        <p class="text-bold card-title">{{vehicle.description}}</p>
+                      <small>{{vehicle.year}} - {{vehicle.fuel.description}} - {{vehicle.isActive ? 'Rentado' : 'Disponible'}}</small>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
+</div>
+
+<div class="d-flex justify-content-center" *ngIf="totalCount">
+    <app-pager 
+                [pageSize]="pageSize"
+                [totalCount]="totalCount"
+                (pageChanged)="onPageChanged($event)"></app-pager>
+</div>
+
+
+

@@ -1,0 +1,24 @@
+<div class="container-fluid">
+    <div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">{{id ? 'Actualizar' : 'Agregar'}} Combustible</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="onClose()"></button>
+	</div>
+	<div class="modal-body">
+		<form [formGroup]="form">
+			<div class="mb-3">
+				<label for="description" class="form-label">Descripcion</label>
+                <input formControlName="description" type="text" class="form-control" id="description" placeholder="descripcion...">
+			</div>
+            <div class="mb-3">
+				<label for="status" class="form-label">Estado</label>
+                <select formControlName="isActive" class="form-select form-select-sm" aria-label=".form-select-sm example" id="status">
+                    <option [ngValue]="true">Activo</option>
+                    <option [ngValue]="false">Inactivo</option>
+                </select>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-success" (click)="save()" [disabled]="!form.valid">Guardar</button>
+	</div>
+</div>

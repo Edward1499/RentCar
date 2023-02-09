@@ -1,0 +1,142 @@
+<div class="container-fluid">
+    <div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">{{id ? 'Actualizar' : 'Agregar'}} Cliente</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="onClose()"></button>
+	</div>
+	<div class="modal-body">
+		<form [formGroup]="form">
+            <div class="row">
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nombre</label>
+                        <input formControlName="name" 
+                               type="text" 
+                               class="form-control" 
+                               id="name"
+                               [ngClass]="{'is-invalid': form.controls['name'].invalid && form.controls['name'].touched, 
+                                'is-valid': form.controls['name'].valid, '': form.controls['name'].untouched}">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="lastName" class="form-label">Apellido</label>
+                        <input formControlName="lastName" 
+                               type="text" 
+                               class="form-control" 
+                               id="lastName"
+                               [ngClass]="{'is-invalid': form.controls['lastName'].invalid && form.controls['lastName'].touched, 
+                                'is-valid': form.controls['lastName'].valid, '': form.controls['lastName'].untouched}">
+                    </div>
+                </div>
+            </div>  
+            <div class="row">
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="personType" class="form-label">Tipo Persona</label>
+                        <select formControlName="personType" 
+                                class="form-select form-select-md" 
+                                aria-label=".form-select-sm example" 
+                                id="personType"
+                                (change)="onChangePersontype($event.target)"
+                                [ngClass]="{'is-invalid': form.controls['personType'].invalid && form.controls['personType'].touched, 
+                                'is-valid': form.controls['personType'].valid, '': form.controls['personType'].untouched}">
+                            <option [value]="1">Fisica</option>
+                            <option [value]="2">Juridica</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="personalNumber" class="form-label">
+                            {{form.controls['personType'].value == 2 ? 'Registro Nacional de Contribuyente(RNC)' : 'Cedula'}}
+                        </label>
+                        <input formControlName="personalNumber" 
+                               type="number" class="form-control" 
+                               id="personalNumber"
+                               [ngClass]="{'is-invalid': form.controls['personalNumber'].invalid && form.controls['personalNumber'].touched, 
+                                'is-valid': form.controls['personalNumber'].valid, 
+                                '': form.controls['personalNumber'].untouched}">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="creditLimit" class="form-label">Limite de credito</label>
+                        <input formControlName="creditLimit" 
+                               type="number" class="form-control" 
+                               id="creditLimit" 
+                               min="0"
+                               oninput="this.value = !!this.value && Math.abs(this.value) > 0 ? Math.abs(this.value) : null"
+                               [ngClass]="{'is-invalid': form.controls['creditLimit'].invalid && form.controls['creditLimit'].touched, 
+                                'is-valid': form.controls['creditLimit'].valid, '': form.controls['creditLimit'].untouched}">
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-6">
+                    <form card
+                    container=".card-container"
+                    [card-width]="350"
+                    [formatting]="true"
+                    [debug]="false">
+
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Numero de tarjeta</label>
+                        <input type="text" 
+                               #fieldName
+                               formControlName="CRNumber" 
+                               class="form-control" 
+                               name="number" 
+                               card-number
+                               [ngClass]="{'is-invalid': form.controls['CRNumber'].invalid && form.controls['CRNumber'].touched, 
+                                'is-valid': form.controls['CRNumber'].valid, '': form.controls['CRNumber'].untouched}"/>
+                    </div>
+                    <div class="mb-3">
+                        <label for="description" class="form-label">Nombre</label>
+                        <input type="text" 
+                               formControlName="CRName" 
+                               name="first-name" 
+                               class="form-control" 
+                               card-name
+                               [ngClass]="{'is-invalid': form.controls['CRName'].invalid && form.controls['CRName'].touched, 
+                                'is-valid': form.controls['CRName'].valid, '': form.controls['CRName'].untouched}"/>
+                    </div>
+                    <div class="mb-3 row">
+                        <div class="col-6">
+                            <label for="description" class="form-label">Expiracion (mm/aa)</label>
+                            <input type="text" 
+                                   formControlName="CRExpiration" 
+                                   name="expiry" 
+                                   class="form-control" 
+                                   card-expiry
+                                   [ngClass]="{'is-invalid': form.controls['CRExpiration'].invalid && form.controls['CRExpiration'].touched, 
+                                    'is-valid': form.controls['CRExpiration'].valid, '': form.controls['CRExpiration'].untouched}"/>
+                        </div>
+                        <div class="col-6">
+                            <label for="description" class="form-label">Codigo de seguridad</label>
+                            <input type="text" 
+                                   formControlName="CRCCVNumber" 
+                                   name="cvc" 
+                                   class="form-control" 
+                                   card-cvc
+                                   [ngClass]="{'is-invalid': form.controls['CRCCVNumber'].invalid && form.controls['CRCCVNumber'].touched, 
+                                    'is-valid': form.controls['CRCCVNumber'].valid, '': form.controls['CRCCVNumber'].untouched}"/>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                <div class="col-6">
+                    <div class="mb-3">
+                        <div class="card-container mt-3"></div>
+                    </div>
+                </div>
+            </div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-success" (click)="save()" [disabled]="!form.valid">Guardar</button>
+	</div>
+</div>
+

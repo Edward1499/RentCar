@@ -1,0 +1,52 @@
+<div class="container-fluid">
+    <div class="modal-header">
+		<h4 class="modal-title" id="modal-basic-title">Generaracion de reportes</h4>
+		<button type="button" class="btn-close" aria-label="Close" (click)="onClose()"></button>
+	</div>
+	<div class="modal-body">
+		<form [formGroup]="form">
+            <div class="row">
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="startDate" class="form-label">Fecha Inicio</label>      
+                        <div class="input-group">
+                            <input
+                                class="form-control"
+                                placeholder="yyyy-mm-dd"
+                                name="dp"
+                                ngbDatepicker
+                                formControlName="startDate"
+                                #d="ngbDatepicker"
+                                [ngClass]="{'is-invalid': form.controls['startDate'].invalid && form.controls['startDate'].touched, 
+                                'is-valid': form.controls['startDate'].valid, '': form.controls['startDate'].untouched}"
+                            />
+                            <button class="btn btn-outline-secondary calendar" (click)="d.toggle()" type="button"></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="mb-3">
+                        <label for="endDate" class="form-label">Fecha Fin</label>      
+                        <div class="input-group">
+                            <input
+                                class="form-control"
+                                placeholder="yyyy-mm-dd"
+                                name="dp"
+                                ngbDatepicker
+                                formControlName="endDate"
+                                #d2="ngbDatepicker"
+                                [ngClass]="{'is-invalid': form.controls['endDate'].invalid && form.controls['endDate'].touched, 
+                                'is-valid': form.controls['endDate'].valid, '': form.controls['endDate'].untouched}"
+                            />
+                            <button class="btn btn-outline-secondary calendar" (click)="d2.toggle()" type="button"></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-outline-success" (click)="generate()" [disabled]="!form.valid">Generar</button>
+	</div>
+</div>
+
